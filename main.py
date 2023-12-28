@@ -1,5 +1,9 @@
-import SpeechRecognition as sr
+import speech_recognition as sr
 import pyttsx3
+import datetime
+import pywhatkit
+
+
 
 r = sr.Recognizer()
 engine = pyttsx3.init()
@@ -20,11 +24,6 @@ def listen():
         except:
             print("Sorry, I did not get that")
             return None
-
-def speak(text):
-    engine = pyttsx3.init()
-    engine.say(text)
-    engine.runAndWait()
     
 while True:
     
@@ -37,6 +36,23 @@ while True:
         speak("What should I remind you about?")
         reminder = listen()
         speak(f"sure, I'll remind you to {reminder} at the time")
+
+    elif "What's your name?" in command:
+        speak("I am ta's assistant, What Can I do for ya?")
+
+    elif "name" in command:
+        speak("I am ta's assistant, What can i do for ya?")
+
+    elif "date" in command:
+        date = datetime.datetime.now().strftime('%d /%m /%y')
+        speak('Current date ' + date)
+
+    elif "play" in command:
+        song = command.replace('play', "")
+        speak("playing " + song)
+        pywhatkit.playonyt(song)
+        speak("Goodbye")
+        break
         
     elif "create a to-do list" in command:
         speak("What are the tasks you want to add to the to-do list?")
@@ -53,6 +69,7 @@ while True:
     elif "search for" in command:
         query = command.replace("search for", "")
         speak (f"Here are the search results for {query}.")
+        break
         
     elif "quit" in command:
         speak("Goodbye!")
