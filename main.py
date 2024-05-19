@@ -76,4 +76,4 @@ while True:
         break
         
     else:
-        speak("I am sorry, I didn't it. Please try again.")
+        speak("I am sorry, I didn't hear it. Please try again.")
